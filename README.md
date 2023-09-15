@@ -1,2 +1,2 @@
-# welab-ajaz
-This is proof of coursework for LAB 1
+# Weblab-1-ajaz
+This is proof of using github and creating a repository for future lab sessions
