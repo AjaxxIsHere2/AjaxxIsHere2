@@ -1,2 +1,3 @@
-# Weblab-1-ajaz
-This is proof of using github and creating a repository for future lab sessions
+# F28WP-lab1
+
+This is a read me file
