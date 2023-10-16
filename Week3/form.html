@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registration Form</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+
+      input.error {
+        border: 1px solid red;
+      }
+
+      /* Style for the form: setting width, auto margin for centering, padding, 
+background color, border radius for rounded corners, and font size */
+      #form {
+        width: 300px;
+        margin: 20vh auto 0 auto;
+        /* This centers the form vertically and 
+    horizontally */
+        padding: 20px;
+        background-color: whitesmoke;
+        /* Light gray background for the form */
+        border-radius: 4px;
+        /* Rounded corners for the form */
+        font-size: 12px;
+      }
+
+      /* Style for the form's heading: setting the text color and alignment */
+      #form h1 {
+        color: #0f2027;
+        /* Dark text color for the heading */
+        text-align: center;
+        /* Center-align the heading */
+      }
+      /* Style for the form's button: padding, top margin, full width, text color, 
+background color, no border, and rounded corners */
+      #form button {
+        padding: 10px;
+        margin-top: 10px; /* Space above the button */
+        width: 100%; /* Make the button expand the full width of the form */
+        color: white; /* White text color for the button */
+        background-color: rgb(
+          41,
+          57,
+          194
+        ); /* Blue background color for the button 
+*/
+        border: none; /* Remove the default border */
+        border-radius: 4px; /* Rounded corners for the button */
+      }
+      /* Container for input fields: using flexbox for layout, column direction */
+      .input-control {
+        display: flex;
+        flex-direction: column; /* Stack the children (label, input, error message) 
+vertically */
+      }
+      /* Style for input fields inside the container: border style, rounded corners, 
+block-level display, font size, padding, full width */
+      .input-control input {
+        border: 2px solid #f0f0f0; /* Light gray border for the inputs */
+        border-radius: 4px; /* Rounded corners for the inputs */
+        display: block; /* Display input field as a block */
+        font-size: 12px; /* Text size within the input field */
+        padding: 10px; /* Space inside the input field */
+        width: 100%; /* Input field takes up 100% of the form's width */
+      }
+      /* Remove focus outline from input fields */
+      .input-control input:focus {
+        outline: 0; /* Remove outline when input is focused */
+      }
+      /* Style for input fields with class "success": green border */
+      .input-control.success input {
+        border-color: #09c372; /* Green border to indicate successful input */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="form">Registration Form</h1>
+    <form id="form">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <div class="error" id="usernameError"></div>
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <div class="error" id="emailError"></div>
+      </div>
+
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <div class="error" id="passwordError"></div>
+      </div>
+
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" />
+        <div class="error" id="confirmPasswordError"></div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const form = document.getElementById("registrationForm");
+
+      form.addEventListener("submit", function (event) {
+        let valid = true;
+
+        // Username validation
+        const usernameInput = document.getElementById("username");
+        const usernameError = document.getElementById("usernameError");
+        if (usernameInput.value.trim() === "") {
+          usernameError.textContent = "Username is required.";
+          usernameInput.classList.add("error");
+          valid = false;
+        } else {
+          usernameError.textContent = "";
+          usernameInput.classList.remove("error");
+        }
+
+        // Email validation
+        const emailInput = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(emailInput.value)) {
+          emailError.textContent = "Invalid email address.";
+          emailInput.classList.add("error");
+          valid = false;
+        } else {
+          emailError.textContent = "";
+          emailInput.classList.remove("error");
+        }
+
+        // Password validation
+        const passwordInput = document.getElementById("password");
+        const passwordError = document.getElementById("passwordError");
+        if (passwordInput.value.length < 6) {
+          passwordError.textContent = "Password must be at least 6 characters.";
+          passwordInput.classList.add("error");
+          valid = false;
+        } else {
+          passwordError.textContent = "";
+          passwordInput.classList.remove("error");
+        }
+
+        // Confirm Password validation
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const confirmPasswordError = document.getElementById(
+          "confirmPasswordError"
+        );
+        if (confirmPasswordInput.value !== passwordInput.value) {
+          confirmPasswordError.textContent = "Passwords do not match.";
+          confirmPasswordInput.classList.add("error");
+          valid = false;
+        } else {
+          confirmPasswordError.textContent = "";
+          confirmPasswordInput.classList.remove("error");
+        }
+
+        if (!valid) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
