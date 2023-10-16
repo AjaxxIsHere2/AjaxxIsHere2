@@ -1,39 +1,24 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resgistration Form</title>
     <style>
-      .error {
-        color: red;
-        font-size: 14px;
-      }
-
-      input.error {
-        border: 1px solid red;
-      }
-
       /* Style for the form: setting width, auto margin for centering, padding, 
 background color, border radius for rounded corners, and font size */
       #form {
         width: 300px;
-        margin: 20vh auto 0 auto;
-        /* This centers the form vertically and 
-    horizontally */
+        margin: 20vh auto 0 auto; /* This centers the form vertically and 
+horizontally */
         padding: 20px;
-        background-color: whitesmoke;
-        /* Light gray background for the form */
-        border-radius: 4px;
-        /* Rounded corners for the form */
+        background-color: whitesmoke; /* Light gray background for the form */
+        border-radius: 4px; /* Rounded corners for the form */
         font-size: 12px;
       }
-
       /* Style for the form's heading: setting the text color and alignment */
       #form h1 {
-        color: #0f2027;
-        /* Dark text color for the heading */
-        text-align: center;
-        /* Center-align the heading */
+        color: #0f2027; /* Dark text color for the heading */
+        text-align: center; /* Center-align the heading */
       }
       /* Style for the form's button: padding, top margin, full width, text color, 
 background color, no border, and rounded corners */
@@ -75,98 +60,117 @@ block-level display, font size, padding, full width */
       .input-control.success input {
         border-color: #09c372; /* Green border to indicate successful input */
       }
+      /* Style for input fields with class "error": red border */
+      .input-control.error input {
+        border-color: #ff3860; /* Red border to indicate an error in input */
+      }
+      /* Style for the error message: text color, font size, and height */
+      .input-control .error {
+        color: #ff3860; /* Red text color for error messages */
+        font-size: 9px; /* Smaller font size for error messages */
+        height: 13px; /* Explicit height to ensure consistent spacing */
+      }
     </style>
   </head>
-
   <body>
-    <h1 id="form">Registration Form</h1>
     <form id="form">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" />
-        <div class="error" id="usernameError"></div>
-      </div>
-
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" />
-        <div class="error" id="emailError"></div>
-      </div>
-
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        <div class="error" id="passwordError"></div>
-      </div>
-
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" />
-        <div class="error" id="confirmPasswordError"></div>
-      </div>
-
-      <button type="submit">Submit</button>
+      <h1>Registration form</h1>
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td id = "nameborder">
+            <input type="text" placeholder="Name" name="name" />
+            <div class="error" id="name-error"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>
+            <input type="text" placeholder="Email" name="email" />
+            <div class="error" id="email-error"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td>
+            <input type="password" placeholder="Password" name="password" />
+            <div class="error" id="password-error"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Confirm Password:</td>
+          <td>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="confirm-password"
+            />
+            <div class="error" id="confirm-password-error"></div>
+          </td>
+        </tr>
+      </table>
+      <button type="submit">Register</button>
     </form>
 
     <script>
-      const form = document.getElementById("registrationForm");
+      const form = document.getElementById("form");
 
       form.addEventListener("submit", function (event) {
         let valid = true;
 
-        // Username validation
-        const usernameInput = document.getElementById("username");
-        const usernameError = document.getElementById("usernameError");
-        if (usernameInput.value.trim() === "") {
-          usernameError.textContent = "Username is required.";
-          usernameInput.classList.add("error");
+        // Username Validation
+        const nameInput = form.elements["name"];
+        if (nameInput === "") {
           valid = false;
-        } else {
-          usernameError.textContent = "";
-          usernameInput.classList.remove("error");
+          document.getElementById("name-error").textContent =
+            "Name is required";
+        }
+        // else {
+        //   document.getElementById("nameborder").style(border-color: #09c372;);
+        // }
+
+        // Email Validation
+        const emailInput = form.elements["email"];
+        if (emailInput === "") {
+          valid = false;
+          document.getElementById("email-error").textContent =
+            "Email is required";
+        } else if (
+          !emailInput.value.trim().toLowerCase().endsWith("@gmail.com")
+        ) {
+          valid = false;
+          document.getElementById("email-error").textContent =
+            "Please use a Gmail address";
         }
 
-        // Email validation
-        const emailInput = document.getElementById("email");
-        const emailError = document.getElementById("emailError");
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (!emailPattern.test(emailInput.value)) {
-          emailError.textContent = "Invalid email address.";
-          emailInput.classList.add("error");
+        // Password Validation
+        const passwordInput = form.elements["password"];
+        if (passwordInput === "") {
           valid = false;
-        } else {
-          emailError.textContent = "";
-          emailInput.classList.remove("error");
+          document.getElementById("password-error").textContent =
+            "Password is required";
+        } else if (passwordInput.value.length < 8) {
+          valid = false;
+          document.getElementById("password-error").textContent =
+            "Password must be at least 8 characters";
         }
 
-        // Password validation
-        const passwordInput = document.getElementById("password");
-        const passwordError = document.getElementById("passwordError");
-        if (passwordInput.value.length < 6) {
-          passwordError.textContent = "Password must be at least 6 characters.";
-          passwordInput.classList.add("error");
+        // Confirm Password Validation
+        const confirmPasswordInput = form.elements["confirm-password"];
+        if (confirmPasswordInput === "") {
           valid = false;
-        } else {
-          passwordError.textContent = "";
-          passwordInput.classList.remove("error");
-        }
-
-        // Confirm Password validation
-        const confirmPasswordInput = document.getElementById("confirmPassword");
-        const confirmPasswordError = document.getElementById(
-          "confirmPasswordError"
-        );
-        if (confirmPasswordInput.value !== passwordInput.value) {
-          confirmPasswordError.textContent = "Passwords do not match.";
-          confirmPasswordInput.classList.add("error");
+          document.getElementById("confirm-password-error").textContent =
+            "Confirm Password is required";
+        } else if (confirmPasswordInput.value !== passwordInput.value) {
           valid = false;
-        } else {
-          confirmPasswordError.textContent = "";
-          confirmPasswordInput.classList.remove("error");
+          document.getElementById("confirm-password-error").textContent =
+            "Passwords do not match";
         }
 
         if (!valid) {
-          event.preventDefault();
+          event.preventDefault(); // Prevent form submission if there are validation errors
+        } else {
+          alert("Form Submitted!");
         }
       });
     </script>
