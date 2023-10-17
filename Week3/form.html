@@ -120,7 +120,7 @@ block-level display, font size, padding, full width */
 
         // Username Validation
         const nameInput = form.elements["name"];
-        if (nameInput === "") {
+        if (nameInput.value.trim() === "") {
           valid = false;
           document.getElementById("name-error").textContent =
             "Name is required";
@@ -131,7 +131,7 @@ block-level display, font size, padding, full width */
 
         // Email Validation
         const emailInput = form.elements["email"];
-        if (emailInput === "") {
+        if (emailInput.vaild.trim() === "") {
           valid = false;
           document.getElementById("email-error").textContent =
             "Email is required";
@@ -145,7 +145,7 @@ block-level display, font size, padding, full width */
 
         // Password Validation
         const passwordInput = form.elements["password"];
-        if (passwordInput === "") {
+        if (passwordInput.value.trim() === "") {
           valid = false;
           document.getElementById("password-error").textContent =
             "Password is required";
@@ -157,7 +157,7 @@ block-level display, font size, padding, full width */
 
         // Confirm Password Validation
         const confirmPasswordInput = form.elements["confirm-password"];
-        if (confirmPasswordInput === "") {
+        if (confirmPasswordInput.value.trim() === "") {
           valid = false;
           document.getElementById("confirm-password-error").textContent =
             "Confirm Password is required";
