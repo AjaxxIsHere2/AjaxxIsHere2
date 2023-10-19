@@ -59,15 +59,17 @@
         "images/canva8.jpg",
       ];
 
-
+      // Selects the image with name=slide property and sets the src to another image from the images array.
       function changeImage() {
         const imageElement = document.querySelector('[name="slide"]');
         imageElement.src = images[index];
         index = (index + 1) % images.length;
       }
 
+      // Runs function every 3 seconds
       setInterval(changeImage, 3000);
 
+      // Start function on page load
       window.addEventListener('load', changeImage);
     </script>
 
@@ -201,7 +203,10 @@
       <script>
         const form = document.getElementById("registration-form");
 
+        // Binds function to the submit button
         form.addEventListener("submit", function (event) {
+
+          // flag variable to indicate when the form is submitted successfully
           let valid = true;
 
           // Username Validation
