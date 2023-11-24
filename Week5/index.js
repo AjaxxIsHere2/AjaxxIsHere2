@@ -26,13 +26,10 @@ db.connect((err) => {
 const publicdircetory = path.join(__dirname, './public');
 app.use(express.static(publicdircetory));
 app.set('view engine', 'hbs');
+app.use(express.urlencoded({extended: true}));
 
-
-
-// req means grab something from the form
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.use('auth', require('./routes/auth'));
+app.use('/', require('./routes/pages'));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
